@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Nokia 3310",
+    "latinName": "nokia_3310",
+    "category": "Классические",
+    "price": "2 500 ₽",
+    "specs": "Дисплей: 84х48 px, Батарея: 900 мАч, Вес: 133 г",
+    "image": "./imgs/_NOKIA_PHONE_07.jpg",
+    "horsepower": 5,
+    "priceValue": 2500
+  },
+  {
+    "name": "Samsung GT-E1050",
+    "latinName": "samsung_gt_e1050",
+    "category": "Классические",
+    "price": "3 200 ₽",
+    "specs": "Дисплей: 96х65 px, Батарея: 800 мАч, Вес: 98 г",
+    "image": "./imgs/samsung gt 1050.jpg",
+    "horsepower": 4,
+    "priceValue": 3200
+  },
+  {
+    "name": "Motorola RAZR V3",
+    "latinName": "motorola_razr_v3",
+    "category": "Раскладные",
+    "price": "5 800 ₽",
+    "specs": "Дисплей: 176х220 px, Батарея: 680 мАч, Вес: 133 г",
+    "image": "./imgs/Motorola_Razr_V3.jpg",
+    "horsepower": 8,
+    "priceValue": 5800
+  },
+  {
+    "name": "LG Chocolate KG800",
+    "latinName": "lg_chocolate_kg800",
+    "category": "Раскладные",
+    "price": "4 500 ₽",
+    "specs": "Дисплей: 240х320 px, Батарея: 700 мАч, Вес: 95 г",
+    "image": "./imgs/LG choclate.jpg",
+    "horsepower": 7,
+    "priceValue": 4500
+  },
+  {
+    "name": "Sony Ericsson W810i",
+    "latinName": "sony_ericsson_w810i",
+    "category": "Музыкальные",
+    "price": "6 200 ₽",
+    "specs": "Дисплей: 176х220 px, Батарея: 930 мАч, Вес: 118 г",
+    "image": "./imgs/sony ericson w810i.jpg",
+    "horsepower": 9,
+    "priceValue": 6200
+  },
+  {
+    "name": "Kyocera KX1",
+    "latinName": "kyocera_kx1",
+    "category": "Классические",
+    "price": "1 800 ₽",
+    "specs": "Дисплей: 96х65 px, Батарея: 850 мАч, Вес: 105 г",
+    "image": "./imgs/kyoxera x1.jpg",
+    "horsepower": 3,
+    "priceValue": 1800
+  },
+  {
+    "name": "Siemens C55",
+    "latinName": "siemens_c55",
+    "category": "Классические",
+    "price": "2 900 ₽",
+    "specs": "Дисплей: 101х80 px, Батарея: 900 мАч, Вес: 120 г",
+    "image": "./imgs/Siemens_C55.jpg",
+    "horsepower": 6,
+    "priceValue": 2900
+  },
+  {
+    "name": "Philips Fisio 525",
+    "latinName": "philips_fisio_525",
+    "category": "Раскладные",
+    "price": "4 100 ₽",
+    "specs": "Дисплей: 128х128 px, Батарея: 750 мАч, Вес: 115 г",
+    "image": "./imgs/fisio.jpg",
+    "horsepower": 7,
+    "priceValue": 4100
+  },
+  {
+    "name": "Samsung SGH-E700",
+    "latinName": "samsung_sgh_e700",
+    "category": "Раскладные",
+    "price": "5 400 ₽",
+    "specs": "Дисплей: 160х128 px, Батарея: 900 мАч, Вес: 110 г",
+    "image": "./imgs/samsung sgh e700.jpg",
+    "horsepower": 8,
+    "priceValue": 5400
+  }
+]

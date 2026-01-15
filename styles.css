@@ -1,0 +1,930 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .text{
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(#EEAECA, #94BBE9);
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            animation: slide 3s linear infinite;
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 0 0 1rem 0;
+        }
+
+        .content-box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 10px 7px 8px 0px rgba(170, 17, 179, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .content-box h1 {
+            margin: 0;
+            padding: 0 0 1rem 0;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .list-box {
+            padding-top: 10px;
+        }
+
+        li {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #333;
+        }
+
+        /* Стили для кнопок */
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Стили для формы обратной связи */
+        .feedback-form {
+            background: linear-gradient(#833AB4, #FD1D1D, #FCB045);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group, .checkbox-group {
+            margin: 10px 0;
+        }
+
+        .radio-group label, .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            font-weight: normal;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Стили для формы аутентификации */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            padding: 20px;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .auth-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1;
+        }
+
+        .auth-form h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2ecc71;
+        }
+
+        .auth-form .btn:hover {
+            background-color: #27ae60;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .remember-me label {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        footer h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: white;
+            margin: 10px 0;
+        }
+
+        footer a {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+.cars-section {
+    margin-bottom: 60px;
+}
+
+.cars-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.car-item {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    border-radius: 35px;
+    background-color: white;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    transition: all 0.1s ease;
+}
+
+.car-item:hover {
+    border: 2px solid tomato;
+}
+
+.car-item:hover button {
+    background-color: tomato;
+    color: white;
+}
+
+.car-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 35px;
+    margin-bottom: 20px;
+}
+
+.car-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.car-name {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.car-specs {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.car-item button {
+    background-color: #f1eee9;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Стили для навигации */
+.nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.nav-container a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-container a:hover {
+    color: tomato;
+}
+
+.nav-container a.active {
+    color: tomato;
+}
+
+.sort-controls {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.sort-controls label {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.sort-controls select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.sort-controls button {
+    padding: 8px 16px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sort-controls button:hover {
+    background-color: #34495e;
+}
+.order-summary {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 4px solid #2c3e50;
+}
+
+.order-summary h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.cart-items {
+    margin: 15px 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-specs {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0;
+}
+
+.cart-item-price {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.remove-from-cart-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-from-cart-btn:hover {
+    background: #c0392b;
+}
+
+.total-price {
+    text-align: right;
+    font-size: 1.2em;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 4px;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Стили для кнопок добавления в корзину */
+.add-to-cart-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #219a52;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .remove-from-cart-btn {
+        align-self: flex-end;
+        margin-top: 10px;
+    }
+}
+.filter-controls {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.filter-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.filter-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.filter-checkbox input[type="checkbox"]:checked + .checkmark:after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.filter-checkbox:hover .checkmark {
+    border-color: #95a5a6;
+}
+
+.filter-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* Стили для сообщения об отсутствии автомобилей */
+.no-cars-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #7f8c8d;
+    font-style: italic;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Адаптивность для фильтров */
+@media (max-width: 768px) {
+    .filter-controls {
+        padding: 10px;
+    }
+
+    .filter-checkbox {
+        font-size: 14px;
+    }
+}
+
+/* Дополнительные стили для корзины */
+.cart-item.hidden-by-filter {
+    opacity: 0.6;
+    background-color: #f8f9fa;
+    border: 1px dashed #bdc3c7;
+}
+
+.cart-item.hidden-by-filter::after {
+    content: " (скрыто фильтром)";
+    font-size: 0.8em;
+    color: #e74c3c;
+    font-style: italic;
+}
+/* Стили для блока комплектаций */
+.configurations-section {
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+}
+
+.configurations-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.configurations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.configuration-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.configuration-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.configuration-item.selected {
+    border-color: #3498db;
+    background-color: #ecf0f1;
+}
+
+.configuration-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.configuration-header h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.configuration-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.configuration-features {
+    margin-bottom: 15px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-3px) scale(1.02);
+}
+
+.feature-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-image {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.feature-caption {
+    font-weight: 500;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.feature-description {
+    font-size: 12px;
+    color: #7f8c8d;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.select-config-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.select-config-btn:hover {
+    background-color: #2980b9;
+}
+
+.select-config-btn.selected {
+    background-color: #27ae60;
+}
+
+/* Стили для дополнительных услуг */
+.additional-services {
+    padding: 40px 20px;
+    background-color: #ecf0f1;
+}
+
+.additional-services h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-3px);
+}
+
+.service-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover .service-image {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.service-name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.service-description {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.service-price {
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.add-service-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-service-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.add-service-btn.added {
+    background-color: #27ae60;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.modal-content h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.modal-btn {
+    padding: 12px 30px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+    background-color: #2980b9;
+    color: #ecf0f1;
+    transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .configurations-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .configurations-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        margin: 10px;
+        min-width: auto;
+    }
+}
+/* Стили для элементов корзины */
+.cart-item.config-item {
+    border-left: 4px solid #3498db;
+    background-color: #ecf0f1;
+}
+
+.cart-item.service-item {
+    border-left: 4px solid #9b59b6;
+    background-color: #f8f9fa;
+}
+
+.cart-item.config-item .cart-item-specs,
+.cart-item.service-item .cart-item-specs {
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Анимации для уведомлений корзины */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}

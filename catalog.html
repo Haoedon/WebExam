@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — RetroPhone.Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .main-header {
+            background: linear-gradient(#EEAECA, #94BBE9);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-dot {
+            color: #FFD700;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            background: white;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header-icon {
+            position: relative;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FF6B6B;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .notification-area {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .notification {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 4px solid #4ECDC4;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            border-left-color: #2ecc71;
+        }
+
+        .notification.error {
+            border-left-color: #e74c3c;
+        }
+
+        .notification.info {
+            border-left-color: #3498db;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            min-height: 60vh;
+            margin: 2rem auto;
+        }
+
+        .sidebar {
+            flex: 0 0 250px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1.5rem;
+            color: #2C3E50;
+            font-size: 1.3rem;
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-section h4 {
+            color: #2C3E50;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .price-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .price-input {
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .apply-filter-btn, .reset-filter-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .apply-filter-btn {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        .apply-filter-btn:hover {
+            background: #ee5a24;
+        }
+
+        .reset-filter-btn {
+            background: #f0f0f0;
+            color: #2C3E50;
+        }
+
+        .reset-filter-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .catalog-section {
+            flex: 1;
+        }
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .catalog-header h2 {
+            font-size: 2rem;
+            color: #2C3E50;
+            margin: 0;
+        }
+
+        .sort-select {
+            padding: 0.7rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2C3E50;
+            margin: 0 0 0.5rem 0;
+            min-height: 2.2rem;
+        }
+
+        .product-rating {
+            color: #FF6B6B;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .price-current {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FF6B6B;
+        }
+
+        .price-original {
+            font-size: 0.9rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #ee5a24;
+        }
+
+        .add-to-cart-btn.added {
+            background: #2ecc71;
+        }
+
+        .load-more-btn {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: #4ECDC4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #45b3aa;
+        }
+
+        .loading {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+        }
+
+        .main-footer {
+            background: #2C3E50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        .footer-section p {
+            margin: 0.5rem 0;
+            color: #bbb;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                flex: 0 0 auto;
+                position: static;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .main-content {
+                margin: 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">RetroPhone<span class="logo-dot">.</span>Store</span>
+                    </a>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Поиск автомобилей..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-links">
+                    <a href="cart.html" class="header-icon" title="Корзина">
+                        <span class="icon-cart">🛒</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="account.html" class="header-icon" title="Личный кабинет">
+                        <span class="icon-account">👤</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Область уведомлений -->
+    <div id="notificationArea" class="notification-area"></div>
+
+    <!-- Основной контент -->
+    <div class="container main-content">
+        <!-- Сайдбар с фильтрами -->
+        <aside class="sidebar">
+            <h3>Фильтры</h3>
+            
+            <!-- Категория товара -->
+            <div class="filter-section">
+                <h4>Категория</h4>
+                <div class="filter-group">
+                    <label><input type="checkbox" name="category" value="Классические"> Классические</label>
+                    <label><input type="checkbox" name="category" value="Раскладные"> Раскладные</label>
+                </div>
+            </div>
+
+            <!-- Стоимость -->
+            <div class="filter-section">
+                <h4>Стоимость (₽)</h4>
+                <div class="price-filter">
+                    <input type="number" id="priceFrom" placeholder="От" class="price-input">
+                    <input type="number" id="priceTo" placeholder="До" class="price-input">
+                </div>
+            </div>
+
+            <!-- Товары со скидкой -->
+            <div class="filter-section">
+                <h4>Спецпредложения</h4>
+                <label><input type="checkbox" id="discountOnly"> Только со скидкой</label>
+            </div>
+
+            <!-- Кнопка применения фильтров -->
+            <button class="apply-filter-btn">Применить</button>
+            <button class="reset-filter-btn">Сбросить</button>
+        </aside>
+
+        <!-- Блок каталога -->
+        <main class="catalog-section">
+            <div class="catalog-header">
+                <h2>Каталог</h2>
+                <select id="sortSelect" class="sort-select">
+                    <option value="default">Сортировка</option>
+                    <option value="price-asc">По цене (возрастание)</option>
+                    <option value="price-desc">По цене (убывание)</option>
+                    <option value="name">По названию</option>
+                    <option value="rating">По рейтингу</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <p class="loading">Загружаем каталог...</p>
+            </div>
+
+            <button id="loadMoreBtn" class="load-more-btn" style="display:none;">Загрузить ещё</button>
+        </main>
+    </div>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>RetroPhone.Store</h4>
+                    <p>Казырные кнопочные телефоны на пояс.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>📞 +7 (495) 123-45-67</p>
+                    <p>✉️ info@phones.ru</p>
+                    <p>📍 г. Москва, ул. Прянишникова, д. 2А</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Режим работы</h4>
+                    <p>Пн-Пт: 09:00 - 18:00</p>
+                    <p>Сб-Вс: 10:00 - 16:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 RetroPhone.Store. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroPhone.Store — Кнопочные телефоны класса люкс</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --dark-color: #2C3E50;
+            --light-color: #F5F7FA;
+        }
+
+        * {
+            font-family: 'Rubik', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #EEAECA 0%, #94BBE9 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 20px;
+            background-color: var(--light-color);
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ee5a24 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 15px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--light-color);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            color: var(--primary-color);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 20px;
+            background-color: white;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            margin-bottom: 25px;
+        }
+
+        .contact-item h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .contact-item p {
+            color: #666;
+            margin: 0;
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .feedback-form {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .feedback-form h3 {
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-control, .form-select, textarea {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #ee5a24;
+            border-color: #ee5a24;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .features-section h2,
+            .contact-section h2,
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span style="color: var(--primary-color);">RetroPhone</span>.Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cta">Заказать</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-danger text-white ms-2" href="catalog.html">Каталог</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>☎️ Классические кнопочные телефоны</h1>
+            <p>Легендарные телефоны эпохи 2000-х с гарантией надёжности и простоты</p>
+            <img src="https://via.placeholder.com/600x300?text=Retro+Phones" alt="Кнопочные телефоны" class="hero-image">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container-lg">
+            <h2>Почему выбирают нас?</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔋</div>
+                        <h3>Долгая батарея</h3>
+                        <p>Кнопочные телефоны работают неделями на одной зарядке, в отличие от современных смартфонов.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Надёжность</h3>
+                        <p>Легендарная прочность и простота конструкции, которая не выходит из строя уже 20 лет.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Простота</h3>
+                        <p>Никаких сложных интерфейсов и приложений. Просто звонки и СМС - как и задумано.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Встроенные игры</h3>
+                        <p>Snake, Tetris и другие классические игры, которые развлекают и по сей день.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Доступные цены</h3>
+                        <p>Легендарные устройства в отличном состоянии по цене, которая не будет вредить кошельку.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Ностальгия</h3>
+                        <p>Вернитесь в золотой век мобильной техники и почувствуйте вкус винтажного дизайна.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container-lg">
+            <h2>Готовы ощутить ностальгию?</h2>
+            <p>Выберите себе легендарный телефон из нашего каталога</p>
+            <a href="catalog.html" class="cta-btn">Перейти в каталог →</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container-lg">
+            <h2>Контакты и обратная связь</h2>
+            <div class="row">
+                <!-- Contact Info -->
+                <div class="col-lg-5 col-md-12">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h4>📞 Телефон</h4>
+                            <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>✉️ Email</h4>
+                            <p><a href="mailto:info@retrophone.ru">info@retrophone.ru</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>📍 Адрес</h4>
+                            <p>г. Москва, ул. Прянишникова, д. 2А</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>⏰ Режим работы</h4>
+                            <p>Пн-Пт: 09:00 - 18:00<br>Сб-Вс: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback Form -->
+                <div class="col-lg-7 col-md-12">
+                    <form class="feedback-form" id="feedbackForm">
+                        <h3>Оставить сообщение</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="fio" class="form-control" placeholder="Ваше ФИО" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select name="source" class="form-select" required>
+                                    <option value="">Откуда узнали о нас?</option>
+                                    <option value="search">Поисковая система</option>
+                                    <option value="social">Социальные сети</option>
+                                    <option value="friend">Рекомендация друга</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="type" class="form-select" required>
+                                    <option value="">Тип обращения</option>
+                                    <option value="complaint">Жалоба</option>
+                                    <option value="suggestion">Предложение</option>
+                                    <option value="question">Вопрос</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <textarea name="message" class="form-control" rows="4" placeholder="Ваше сообщение" required></textarea>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="consent" id="consent" required>
+                            <label class="form-check-label" for="consent">
+                                Я согласен на обработку персональных данных
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-lg">
+            <p>&copy; 2024 RetroPhone.Store — Классические кнопочные телефоны. Все права защищены.</p>
+            <p>
+                <a href="#">Политика конфиденциальности</a> | 
+                <a href="#">Условия использования</a> | 
+                <a href="catalog.html">Каталог</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle feedback form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Show success message
+            alert('Спасибо за вашу обратную связь! Мы свяжемся с вами в ближайшее время.');
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

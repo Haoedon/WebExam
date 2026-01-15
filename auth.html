@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма аутентификации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        .auth-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-group input {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 20px;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <form class="auth-form" action="https://httpbin.org/post" method="POST">
+            <div class="logo">
+                <h1>Вход в систему</h1>
+                <p>Введите ваши учетные данные</p>
+            </div>
+
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" id="login" name="login" class="form-control" placeholder="Введите ваш логин" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Введите ваш пароль" required>
+                    <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Запомнить меня</label>
+                </div>
+
+                <a href="#" class="forgot-link">Забыли пароль?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Войти</button>
+
+            <div class="divider">
+                <span>или войдите с помощью</span>
+            </div>
+
+            <div class="social-login">
+                <button type="button" class="social-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#1877F2">
+                        <path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325 1.42-3.592 3.5-3.592.699-.002 1.399.034 2.095.107v2.42h-1.435c-1.128 0-1.348.538-1.348 1.325v1.735h2.697l-.35 2.725h-2.348V21H20a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"/>
+                    </svg>
+                </button>
+
+                <button type="button" class="social-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#1DA1F2">
+                        <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                    </svg>
+                </button>
+
+                <button type="button" class="social-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#DB4437">
+                        <path d="M12 11.5c1.381 0 2.5-1.119 2.5-2.5s-1.119-2.5-2.5-2.5S9.5 7.619 9.5 9s1.119 2.5 2.5 2.5zm0 1c-4.136 0-7.5 1.641-7.5 3.5V19h15v-2.5c0-1.859-3.364-3.5-7.5-3.5z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="register-link">
+                Нет аккаунта? <a href="#">Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Функция для переключения видимости пароля
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Изменение иконки
+            this.textContent = type === 'password' ? '👁️' : '🔒';
+        });
+
+        // Добавляем валидацию формы
+        document.querySelector('.auth-form').addEventListener('submit', function(e) {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            if (!login || !password) {
+                e.preventDefault();
+                alert('Пожалуйста, заполните все обязательные поля');
+            }
+        });
+    </script>
+</body>
+</html>

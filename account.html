@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — RetroPhone.Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-wrapper {
+            flex: 1;
+        }
+
+        .main-header {
+            background: linear-gradient(#EEAECA, #94BBE9);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-dot {
+            color: #FFD700;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header-icon {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .notification-area {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .notification {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 4px solid #4ECDC4;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            border-left-color: #2ecc71;
+        }
+
+        .notification.error {
+            border-left-color: #e74c3c;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .orders-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 2rem 0;
+        }
+
+        .orders-section h2 {
+            font-size: 2rem;
+            color: #2C3E50;
+            margin-bottom: 1.5rem;
+        }
+
+        .no-orders {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .orders-table thead {
+            background: #F5F7FA;
+        }
+
+        .orders-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #2C3E50;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .orders-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        .orders-table tr:hover {
+            background: #F9F9F9;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .action-btn.view {
+            color: #3498db;
+            title: "Просмотр";
+        }
+
+        .action-btn.edit {
+            color: #2ecc71;
+            title: "Редактирование";
+        }
+
+        .action-btn.delete {
+            color: #e74c3c;
+            title: "Удаление";
+        }
+
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #ee5a24;
+        }
+
+        .modal-btn-secondary {
+            background: #f0f0f0;
+            color: #2C3E50;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2C3E50;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: #FF6B6B;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .order-details {
+            background: #F5F7FA;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-row strong {
+            color: #2C3E50;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .main-footer {
+            background: #2C3E50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        .footer-section p {
+            margin: 0.5rem 0;
+            color: #bbb;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .orders-table {
+                font-size: 0.9rem;
+            }
+
+            .orders-table th,
+            .orders-table td {
+                padding: 0.5rem;
+            }
+
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">RetroPhone<span class="logo-dot">.</span>Store</span>
+                    </a>
+                </div>
+                
+                <div class="header-links">
+                    <a href="catalog.html" class="header-icon" title="Каталог">
+                        📚 Каталог
+                    </a>
+                    <a href="cart.html" class="header-icon" title="Корзина">
+                        🛒
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Область уведомлений -->
+    <div id="notificationArea" class="notification-area"></div>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Раздел заказов -->
+            <section class="orders-section">
+                <h2>Заказы</h2>
+                <div id="ordersContainer">
+                    <p class="no-orders">Загружаем заказы...</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Модальное окно просмотра заказа -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Просмотр заказа</div>
+            <div class="modal-body">
+                <div id="viewOrderDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('viewModal')">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования заказа -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Редактирование заказа</div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="editOrderId">
+
+                    <div class="form-group">
+                        <label for="editName">Имя</label>
+                        <input type="text" id="editName" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editPhone">Телефон</label>
+                        <input type="text" id="editPhone" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editAddress">Адрес доставки</label>
+                        <input type="text" id="editAddress" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDeliveryDate">Дата доставки</label>
+                        <input type="date" id="editDeliveryDate" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDeliveryTime">Время доставки</label>
+                        <select id="editDeliveryTime" class="form-control" required>
+                            <option value="">Выберите время</option>
+                            <option value="morning">09:00 - 12:00</option>
+                            <option value="afternoon">12:00 - 15:00</option>
+                            <option value="evening">15:00 - 18:00</option>
+                            <option value="late">18:00 - 21:00</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editComment">Комментарий к заказу</label>
+                        <textarea id="editComment" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('editModal')">Отмена</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveOrderChanges()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Удаление заказа</div>
+            <div class="modal-body">
+                <div class="confirmation-message">
+                    <p>Вы уверены, что хотите удалить заказ?</p>
+                </div>
+                <input type="hidden" id="deleteOrderId">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('deleteModal')">Нет</button>
+                <button class="modal-btn modal-btn-primary" onclick="confirmDelete()">Да</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>RetroPhone.Store</h4>
+                    <p>Японские автомобили из-за рубежа с гарантией чистоты сделки.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>📞 +7 (495) 123-45-67</p>
+                    <p>✉️ info@japan-cars.ru</p>
+                    <p>📍 г. Москва, ул. Прянишникова, д. 2А</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Режим работы</h4>
+                    <p>Пн-Пт: 09:00 - 18:00</p>
+                    <p>Сб-Вс: 10:00 - 16:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RetroPhone.Store. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="account.js"></script>
+</body>
+</html>
