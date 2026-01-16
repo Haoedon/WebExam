@@ -191,29 +191,56 @@ async function submitOrder(e) {
         return;
     }
 
-    const orderData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        newsletter: document.getElementById('newsletter').checked,
-        address: document.getElementById('address').value,
-        deliveryDate: document.getElementById('deliveryDate').value,
-        deliveryTime: document.getElementById('deliveryTime').value,
-        comment: document.getElementById('comment').value,
+    // Валидация формы
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const deliveryDate = document.getElementById('deliveryDate').value;
+    const deliveryTime = document.getElementById('deliveryTime').value;
+
+    if (!name || !email || !phone || !address || !deliveryDate || !deliveryTime) {
+        showNotification('Пожалуйста, заполните все обязательные поля', 'error');
+        return;
+    }
+
+    // Подготовка данных для отправки на сервер
+    const formData = new FormData();
+    formData.append('fio', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('deliveryDate', deliveryDate);
+    formData.append('deliveryTime', deliveryTime);
+    formData.append('comment', document.getElementById('comment').value.trim());
+    formData.append('newsletter', document.getElementById('newsletter').checked ? 'on' : 'off');
+    
+    // Отправляем информацию о товарах как JSON строку
+    const total = parseFloat(document.getElementById('totalCost').dataset.value) || 0;
+    const cart_data = JSON.stringify({
         items: cart,
-        total: document.getElementById('totalCost').textContent,
-        timestamp: new Date().toISOString()
-    };
+        total: total
+    });
+    formData.append('cart_data', cart_data);
+
+    console.log('Отправка заказа:', {
+        fio: name,
+        email: email,
+        phone: phone,
+        cart_items: cart.length,
+        total: total
+    });
 
     try {
-        // Имитация отправки на сервер
         const response = await fetch('save_order.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderData)
+            body: formData
         });
+
+        console.log('Статус ответа:', response.status);
+        
+        const data = await response.json();
+        console.log('Ответ сервера:', data);
 
         if (response.ok) {
             // Успешный заказ
@@ -227,11 +254,26 @@ async function submitOrder(e) {
                 window.location.href = 'index.html';
             }, 2000);
         } else {
-            showNotification('Ошибка при оформлении заказа', 'error');
+            console.error('Ошибка сервера:', data);
+            showNotification(data.error || 'Ошибка при оформлении заказа', 'error');
         }
     } catch (error) {
-        console.error('Ошибка:', error);
+        console.error('Ошибка сети:', error);
+        showNotification('Ошибка подключения. Заказ сохранен локально.', 'error');
         // Если сервер недоступен, сохраняем заказ локально
+        const orderData = {
+            name: name,
+            email: email,
+            phone: phone,
+            newsletter: document.getElementById('newsletter').checked,
+            address: address,
+            deliveryDate: deliveryDate,
+            deliveryTime: deliveryTime,
+            comment: document.getElementById('comment').value.trim(),
+            items: cart,
+            total: total,
+            timestamp: new Date().toISOString()
+        };
         saveOrderLocally(orderData);
     }
 }
